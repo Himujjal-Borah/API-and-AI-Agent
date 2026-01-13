@@ -1,0 +1,824 @@
+{
+  "name": "test 2(API & AI agent) with google sheet",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Fill your Details",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Name",
+              "placeholder": "Name"
+            },
+            {
+              "fieldLabel": "Age",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Below 18"
+                  },
+                  {
+                    "option": "18 - 60"
+                  },
+                  {
+                    "option": "Above 60"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Gender",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Male"
+                  },
+                  {
+                    "option": "Female"
+                  },
+                  {
+                    "option": "Others"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email",
+              "placeholder": "Email"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        -624,
+        144
+      ],
+      "id": "91f1bd0f-ffb1-4af9-b343-751965c08d6b",
+      "name": "On form submission",
+      "webhookId": "4471b36e-194e-4265-a1c6-46b57dfdae1a"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1jjBkMYOH-bkmn2ywHFRgJIY59Hwru01Myel6wPsX-Oo",
+          "mode": "list",
+          "cachedResultName": "Test 2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jjBkMYOH-bkmn2ywHFRgJIY59Hwru01Myel6wPsX-Oo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jjBkMYOH-bkmn2ywHFRgJIY59Hwru01Myel6wPsX-Oo/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ $json.Name }}",
+            "Age": "={{ $json.Age }}",
+            "Gender": "={{ $json.Gender }}",
+            "Email": "={{ $json.Email }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Age",
+              "displayName": "Age",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Gender",
+              "displayName": "Gender",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Remark",
+              "displayName": "Remark",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -416,
+        144
+      ],
+      "id": "176659b8-f8e5-475c-bd8e-b663c29bb22d",
+      "name": "Append row in sheet"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.Age }}",
+                    "rightValue": "Below 18",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "99f3c6a0-39d2-4891-ba06-a63349d7b15f"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "2578cfea-2593-492a-b277-952781ac7eb8",
+                    "leftValue": "={{ $json.Age }}",
+                    "rightValue": "18 - 60",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "bdf1cad2-833d-4f17-bffe-bd63d2f20f6f",
+                    "leftValue": "={{ $json.Age }}",
+                    "rightValue": "Above 60",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        -208,
+        128
+      ],
+      "id": "436c6e77-e926-4775-ac01-43ef53b58c88",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1jjBkMYOH-bkmn2ywHFRgJIY59Hwru01Myel6wPsX-Oo",
+          "mode": "list",
+          "cachedResultName": "Test 2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jjBkMYOH-bkmn2ywHFRgJIY59Hwru01Myel6wPsX-Oo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jjBkMYOH-bkmn2ywHFRgJIY59Hwru01Myel6wPsX-Oo/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": 0,
+            "Name": "={{ $('Append row in sheet').item.json.Name }}",
+            "Age": "={{ $('Append row in sheet').item.json.Age }}",
+            "Gender": "={{ $('Append row in sheet').item.json.Gender }}",
+            "Remark": "You cannot Drive"
+          },
+          "matchingColumns": [
+            "Name"
+          ],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Age",
+              "displayName": "Age",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Gender",
+              "displayName": "Gender",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Remark",
+              "displayName": "Remark",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        0,
+        0
+      ],
+      "id": "7bbd87e9-3605-4474-912f-d8b372dbbc52",
+      "name": "Update row in sheet"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1jjBkMYOH-bkmn2ywHFRgJIY59Hwru01Myel6wPsX-Oo",
+          "mode": "list",
+          "cachedResultName": "Test 2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jjBkMYOH-bkmn2ywHFRgJIY59Hwru01Myel6wPsX-Oo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jjBkMYOH-bkmn2ywHFRgJIY59Hwru01Myel6wPsX-Oo/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ $('Append row in sheet').item.json.Name }}",
+            "Age": "={{ $('Append row in sheet').item.json.Age }}",
+            "Gender": "={{ $('Append row in sheet').item.json.Gender }}",
+            "Remark": "You are elligible for a licence"
+          },
+          "matchingColumns": [
+            "Name"
+          ],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Age",
+              "displayName": "Age",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Gender",
+              "displayName": "Gender",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Remark",
+              "displayName": "Remark",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        0,
+        144
+      ],
+      "id": "a3ed1c39-be69-48e8-8e80-9c50d19b1ddc",
+      "name": "Update row in sheet1"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1jjBkMYOH-bkmn2ywHFRgJIY59Hwru01Myel6wPsX-Oo",
+          "mode": "list",
+          "cachedResultName": "Test 2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jjBkMYOH-bkmn2ywHFRgJIY59Hwru01Myel6wPsX-Oo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jjBkMYOH-bkmn2ywHFRgJIY59Hwru01Myel6wPsX-Oo/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ $('Append row in sheet').item.json.Name }}",
+            "Age": "={{ $('Append row in sheet').item.json.Age }}",
+            "Gender": "={{ $('Append row in sheet').item.json.Gender }}",
+            "Remark": "It's risky for you to drive"
+          },
+          "matchingColumns": [
+            "Name"
+          ],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Age",
+              "displayName": "Age",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Gender",
+              "displayName": "Gender",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Remark",
+              "displayName": "Remark",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        0,
+        320
+      ],
+      "id": "9a13e45f-144c-4b62-8e60-b9ae551de1ef",
+      "name": "Update row in sheet2"
+    },
+    {
+      "parameters": {
+        "jsCode": "// ---- CONFIG ----\nconst API_URL = \"https://jsonplaceholder.typicode.com/posts/1\";\nconst API_KEY = \"YOUR_API_KEY\"; // optional\n\n// ---- API CALL USING N8N CLIENT ----\nconst data = await this.helpers.httpRequest({\n\tmethod: \"GET\",\n\turl: API_URL,\n\theaders: {\n\t\t\"Content-Type\": \"application/json\",\n\t\t\"Authorization\": `Bearer ${API_KEY}`,\n\t},\n});\n\n// ---- RETURN TO WORKFLOW ----\nreturn [\n\t{\n\t\tjson: data,\n\t},\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        288,
+        144
+      ],
+      "id": "d522005f-106e-4150-becc-f13a0bbd39c5",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Suggest me a vehicle. It may be any thing bike and car.\nthe vahicle should match with their parsonality i am mentioning below. Just a single word suggestion. If The age is below 18 suggest them a bicycle.\nName: {{ $('Append row in sheet').item.json.Name }}\nAge:{{ $('Append row in sheet').item.json.Age }}\nGender:{{ $('Append row in sheet').item.json.Gender }}\n\n\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        528,
+        144
+      ],
+      "id": "15fd26c2-1b1d-4259-adfc-6e0fa8587b56",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        464,
+        336
+      ],
+      "id": "8726c138-f27d-469a-9932-a0e66cce6a1e",
+      "name": "Google Gemini Chat Model"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1jjBkMYOH-bkmn2ywHFRgJIY59Hwru01Myel6wPsX-Oo",
+          "mode": "list",
+          "cachedResultName": "Test 2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jjBkMYOH-bkmn2ywHFRgJIY59Hwru01Myel6wPsX-Oo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jjBkMYOH-bkmn2ywHFRgJIY59Hwru01Myel6wPsX-Oo/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ $('Append row in sheet').item.json.Name }}",
+            "Suggest": "={{ $json.output }}"
+          },
+          "matchingColumns": [
+            "Name"
+          ],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Age",
+              "displayName": "Age",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Gender",
+              "displayName": "Gender",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Remark",
+              "displayName": "Remark",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Suggest",
+              "displayName": "Suggest",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        880,
+        144
+      ],
+      "id": "a4d171d2-ea82-4b7c-acdc-709c266e383e",
+      "name": "Update row in sheet3"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('On form submission').item.json.Email }}",
+        "subject": "Updates!",
+        "emailType": "text",
+        "message": "={{ $('On form submission').item.json.Email }}\nYou are suggest to drive: {{ $('AI Agent').item.json.output }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1088,
+        144
+      ],
+      "id": "1756f410-0021-480e-8513-2178f598b3fc",
+      "name": "Send a message",
+      "webhookId": "a88a06e6-ad63-495f-8919-5e9469b4f625"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update row in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet2": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet3": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "2237a18d-9a9e-40ae-8748-7c8e0c5cd336",
+  "meta": {
+    "instanceId": "7a25a0f471046aa79c17fba7d484d4c64893efc5c87f7037428c18f4bb8f727d"
+  },
+  "id": "nHIqhKHKmrmPDVXD",
+  "tags": []
+}
